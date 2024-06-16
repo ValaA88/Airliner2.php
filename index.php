@@ -35,10 +35,18 @@ if(mysqli_num_rows($result) == 0){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-  <?= $layout ?>
-</body>
+  <div class="container">
+    <a href="register.php">Register here</a>
+    <a href="login.php">Login here</a>
+    <a href="create.php" class="btn btn-primary" style="margin: 20px; text-align: center;">Book a ticket</a>
+    <div class="row row-cols-3">
+      <?= $layout ?>
+    </div>
+  </div>
 
 </html>
