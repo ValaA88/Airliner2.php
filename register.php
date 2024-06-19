@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+if(isset($_SESSION["admin"])){
+  header("location: dashboard.php");
+}
+
+if(isset($_SESSION["user"])){
+  header("location: home.php");
+}
+
 require_once("./db_connect.php");
 require_once("./functions.php");
 
@@ -14,7 +24,7 @@ if(isset($_POST['register'])){
   $email = cleanInputs($_POST['email']);
   $password = cleanInputs($_POST['password']);
   $dateOfBirth = cleanInputs($_POST['dateOfBirth']);
-  $image = fileUpload($_POST['image']);
+  $image = fileUpload($_FILES['image']);
 
   #first name validation
   if(empty($firstName)){
@@ -48,7 +58,7 @@ if(isset($_POST['register'])){
     $error = true;
     $emailError = "Please enter a valid email";
   } else {
-    $sql = "SELECT `email`FROM `users` WHERE email = {$email}";
+    $sql = "SELECT email FROM `users` WHERE email = '{$email}'";
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) != 0){
       $error = true;
@@ -84,6 +94,7 @@ if(isset($_POST['register'])){
     <h4 class='alert-heading'>Well done! {$image[1]}</h4>
     <p>You registered successfully!</p>
   </div>";
+
     $firstName = $lastName = $email = $dateOfBirth = "";
   } else {
     echo "<div class='alert alert-danger' role='alert'>

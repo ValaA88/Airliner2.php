@@ -1,13 +1,23 @@
 <?php
 
+session_start();
+
+if(isset($_SESSION['user'])){
+  header("location: home.php");
+}
+
+if(isset($_SESSION['admin'])){
+  header("location: dashboard.php");
+}
+
 require_once("./db_connect.php");
 require_once("./functions.php");
 
 $error = false;
 
-$email = $emailError = $passError = "";
+$email = $emailError = $passError = $loginError = "";
 
-if(isset($_POST['login'])){
+if(isset($_POST["login"])){
   $email = cleanInputs($_POST['email']);
   $password = cleanInputs($_POST['password']);
 
@@ -30,10 +40,26 @@ if(isset($_POST['login'])){
     $password = hash("sha256", $password);
   }
 
-  $sql = "SELECT * FROM `users` WHERE email = {$email} AND password = {$password}";
+  $sql = "SELECT * FROM users WHERE email = '{$email}' AND password = '{$password}'";
   $result = mysqli_query($conn, $sql);
   $count = mysqli_num_rows($result);
   $row = mysqli_fetch_assoc($result);
+
+  if($count == 1){
+    if($row['is_blocked']){
+      $loginError = "block msg";
+    }
+    elseif($row['status'] == 'adm'){
+      $_SESSION['admin'] = $row['id'];
+      header("location: dashboard.php");
+    }
+    elseif($row['status'] == 'user'){
+      $_SESSION['user'] = $row['id'];
+      header("location: home.php");
+    }
+  }
+
+
 
   if($error){
     echo "<div class='alert alert-danger' role='alert'>
