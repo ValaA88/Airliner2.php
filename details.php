@@ -7,6 +7,10 @@ require_once("./db_connect.php");
 $session = 0;
 $goBack = "";
 
+if(!isset($_SESSION['user']) && !isset($_SESSION['admin'])){
+  $goBack = "index.php";
+}
+
 if(isset($_SESSION['user'])){
   $session = $_SESSION['user'];
   $goBack = "home.php";
@@ -25,7 +29,7 @@ $row = mysqli_fetch_assoc($result);
 
 $layout = "
 <div class='card' style='width: 18rem;'>
-    <img src='...' class='card-img-top' alt='...'>
+    <img src='images/{$row['image']}' class='card-img-top' alt='...'>
     <div class='card-body'>
 
       <h6 class='card-title'>Flight no: {$row['flightNumber']}</h6><br>

@@ -62,3 +62,58 @@ if(isset($_POST['update'])){
 
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body style="background-color: #145DA0">
+
+  <div class="container" style="margin-top: 40px; ">
+    <h1 style="font-size: 24px;">Change your ticket</h1>
+    <div class="mb-3">
+      <form method="post" enctype="multipart/form-data" style="margin-bottom: 20px">
+        <div class="row" style="margin-bottom: 20px">
+
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Flight Number" name="flightNumber"
+              value="<?= $row["flightNumber"]?>">
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Departure from*" name="departure"
+              value="<?= $row["departure"]?>">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Arrival to*" name="arrival"
+              value="<?= $row["arrival"]?>">
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <div class="col">
+            <input type="date" class="form-control" placeholder="Date*" name="date" value="<?= $row["date"]?>">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="ticketPrice*" name="ticketPrice"
+              value="<?= $row["ticketPrice"]?>">
+          </div>
+        </div>
+    </div>
+    <input type="file" class="form-control" placeholder="image url" name="image" style="margin-bottom: 20px"
+      value="<?= $row["image"]?>">
+    <input type="submit" class="btn btn-success" value="Update Ticket" name="update">
+    </form>
+    <a href="<?= $goBack ?>" class="btn btn-secondary" type="text">Back</a>
+  </div>
+  </div>
+</body>
+
+</html>
