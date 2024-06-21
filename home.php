@@ -16,9 +16,12 @@ if(isset($_SESSION['admin'])){
 
 require_once("./db_connect.php");
 
-$sql = "SELECT * FROM users WHERE id = {$_SESSION['user']}";
-$sql = "SELECT * FROM flightBookings WHERE id = {$_SESSION['user']}";
-$result = mysqli_query($conn,$sql);
+$sqlU = "SELECT * FROM users WHERE id = {$_SESSION['user']}";
+$sqlB = "SELECT * FROM flightBookings WHERE id = {$_SESSION['user']}";
+$resultU = mysqli_query($conn,$sqlU);
+$resultB = mysqli_query($conn,$sqlB);
+
+$countU = mysqli_fetch_assoc($resultU);
 
 $sqlBooking = "SELECT * FROM flightBookings
 JOIN userBooking ON flightBookings.id = userBooking.bookingID
@@ -64,7 +67,7 @@ if(mysqli_num_rows($resultBooking) == 0){
   <nav class="navbar bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="images/<?= $row['image[0]']?>" alt="Bootstrap" width="30" height="24">
+        <img src="images/<?= $row['image[0]']?>" alt="<?= $countU['firstName']?>" width="30" height="24">
       </a>
       <a class="navbar-brand" href="updateprofile.php">Update profile</a>
       <a class="navbar-brand" href="logout.php?logout">Logout</a>

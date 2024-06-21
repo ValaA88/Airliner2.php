@@ -59,8 +59,9 @@ if(mysqli_num_rows($resultIndex) == 0){
   <nav class="navbar bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="images/<?= $row['image']?>" alt="Bootstrap" width="30" height="24">
+        <img src="images/<?= $row['image']?>" alt="Bootstrap" width="30" height="24"><?= $row['firstName']?>
       </a>
+
       <a href="create.php" class="btn btn-primary" style="margin: 20px; text-align: center;">Create a flight ticket</a>
       <a class="navbar-brand" href="updateprofile.php">Update profile</a>
       <a class="navbar-brand" href="logout.php?logout">Logout</a>
