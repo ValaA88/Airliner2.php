@@ -31,9 +31,9 @@ if(mysqli_num_rows($result) == 0){
       <label name='blocked'>
       <p value=''>user $status</p>";
       if($value['is_blocked'] == 0){
-        $layout .= "<a href='blocked_user.php?id={$value['id']}' class='btn btn-warning'>Block</a>";
+        $layout .= "<a href='blocked_users.php?id={$value['id']}' class='btn btn-warning'>Block</a>";
       }else {
-        $layout .= "<a href='unblocked_user.php?id={$value['id']}' class='btn btn-success'>Active</a>";
+        $layout .= "<a href='unblocked_users.php?id={$value['id']}' class='btn btn-success'>Active</a>";
       }
       $layout .="
       </label>
@@ -61,7 +61,7 @@ if(mysqli_num_rows($result) == 0){
       <?= $layout ?>
       <input type="submit" class="btn btn-success" value="Update" name="blocked">
 
-      <button href="dashboard.php" value="back">Back</button>
+      <a href="dashboard.php" value="back" class="btn btn-danger">Back</a>
 
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -47,7 +47,11 @@ if(isset($_POST["login"])){
 
   if($count == 1){
     if($row['is_blocked']){
-      $loginError = "block msg";
+      $loginError = "<div class='alert alert-danger' role='alert'>
+      <h4 class='alert-heading'>Your account is Blocked</h4>
+      <p>Please contact admin</p>
+      <hr>
+    </div>";
     }
     elseif($row['status'] == 'adm'){
       $_SESSION['admin'] = $row['id'];
